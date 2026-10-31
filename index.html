@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SmartSpend AI</title>
+    
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f0f4f8;
+            text-align: center;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #243b55;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            margin: auto;
+            width: 350px;
+            border-radius: 15px;
+        }
+
+        input, select, button {
+            width: 90%;
+            padding: 12px;
+            margin: 10px;
+        }
+
+        button {
+            background: #243b55;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>SmartSpend AI</h1>
+    <h3>Intelligent Expense Tracker</h3>
+
+    <div class="container">
+
+        <h2>Add Your Expense</h2>
+
+        <form method="post">
+            <input type="text" name="name" placeholder="Expense Name" required>
+
+            <input type="number" name="amount" placeholder="Enter Amount" min="0.01" step="0.01" required>
+
+            <select name="category" required>
+                <option value="" selected disabled>Select Category</option>
+                <option>Food</option>
+                <option>Shopping</option>
+                <option>Travel</option>
+                <option>Education</option>
+                <option>Other</option>
+            </select>
+
+            <button type="submit">Add Expense</button>
+        </form>
+
+        {% if expenses %}
+            <h2>Expenses</h2>
+            <ul>
+                {% for expense in expenses %}
+                    <li>{{ expense.name }} — {{ "%.2f"|format(expense.amount) }} ({{ expense.category }})</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
